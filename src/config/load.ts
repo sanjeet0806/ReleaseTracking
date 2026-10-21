@@ -69,12 +69,20 @@ export function validateSite(raw: unknown, source: string): SiteConfig {
   if (!Array.isArray(site.catalog.requiredProductFields)) fail(source, 'catalog.requiredProductFields must be a list');
   if (!Array.isArray(site.catalog.requiredTagPrefixes)) fail(source, 'catalog.requiredTagPrefixes must be a list');
   if (!Array.isArray(site.catalog.forbiddenTagPrefixes)) fail(source, 'catalog.forbiddenTagPrefixes must be a list');
+  if (!nonEmptyString(site.catalog.currency) || !/^[A-Z]{3}$/.test(site.catalog.currency)) fail(source, 'catalog.currency must be an ISO code such as USD');
+  if (!nonEmptyString(site.catalog.locale)) fail(source, 'catalog.locale is required, e.g. en-US');
+  if (typeof site.catalog.priceInHtml !== 'boolean') fail(source, 'catalog.priceInHtml must be true or false');
+  if (site.knownIssues !== undefined && (!Array.isArray(site.knownIssues) || !site.knownIssues.every((k) => nonEmptyString(k?.match) && nonEmptyString(k?.id)))) fail(source, 'knownIssues must be a list of { match, id }');
   const fields = ['title', 'handle', 'vendor', 'product_type', 'body_html', 'images', 'price', 'sku'];
   const badField = site.catalog.requiredProductFields.find((f) => !fields.includes(f));
   if (badField) fail(source, `catalog.requiredProductFields has unknown field "${badField}" (allowed: ${fields.join(', ')})`);
   if (!Array.isArray(site.search.terms) || !site.search.terms.every(nonEmptyString) || site.search.terms.length === 0) fail(source, 'search.terms must list at least one term');
   if (!nonEmptyString(site.search.noResultTerm)) fail(source, 'search.noResultTerm is required');
   if (!Array.isArray(site.leftoverPagePatterns)) fail(source, 'leftoverPagePatterns must be a list');
+  if (site.contentMasks !== undefined) {
+    if (!Array.isArray(site.contentMasks)) fail(source, 'contentMasks must be a list of regexes');
+    site.contentMasks.forEach((re, i) => checkRegex(source, `contentMasks[${i}]`, re));
+  }
   site.leftoverPagePatterns.forEach((re, i) => checkRegex(source, `leftoverPagePatterns[${i}]`, re));
   if (site.leftoverPageAllow !== undefined && (!Array.isArray(site.leftoverPageAllow) || !site.leftoverPageAllow.every(nonEmptyString))) fail(source, 'leftoverPageAllow must be a list of page handles');
   return site;

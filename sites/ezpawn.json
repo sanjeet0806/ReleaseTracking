@@ -132,7 +132,10 @@
     ],
     "forbiddenTagPrefixes": [
       "Serial#"
-    ]
+    ],
+    "currency": "USD",
+    "locale": "en-US",
+    "priceInHtml": false
   },
   "structuredData": {
     "allowRatings": false
@@ -145,6 +148,28 @@
     ],
     "noResultTerm": "zzqxjvnoresultqa"
   },
+  "knownIssues": [
+    {
+      "match": "Structured data URL",
+      "id": "QA-001"
+    },
+    {
+      "match": "includes ratings or reviews",
+      "id": "QA-002"
+    },
+    {
+      "match": "Public product data includes \"Serial#\"",
+      "id": "QA-004"
+    },
+    {
+      "match": "Product field \"product_type\" is blank",
+      "id": "QA-010"
+    }
+  ],
+  "contentMasks": [
+    "\\u00a9\\s*\\d{4}",
+    "copyright\\s*\\d{4}"
+  ],
   "leftoverPagePatterns": [
     "(^|-)test(-|$)",
     "^copy-of",

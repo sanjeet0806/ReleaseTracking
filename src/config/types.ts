@@ -24,8 +24,13 @@ export interface SiteConfig {
     requiredProductFields: ProductField[];
     /** Each product must carry at least one tag with each prefix, e.g. "Store_". */
     requiredTagPrefixes: string[];
-    /** Tag prefixes that must not appear in public product data, e.g. "Serial#". */
+    /** Tag prefixes that must not appear in public product data, e.g. "Serial#". Matched ignoring case and spaces. */
     forbiddenTagPrefixes: string[];
+    /** ISO currency and locale used to format prices, e.g. USD / en-US. */
+    currency: string;
+    locale: string;
+    /** false for themes that render the price with JavaScript (skips the price-in-HTML check). */
+    priceInHtml: boolean;
   };
   structuredData: {
     /** false = flag aggregateRating/review markup on product pages. */
@@ -35,6 +40,16 @@ export interface SiteConfig {
     terms: string[];
     noResultTerm: string;
   };
+  /**
+   * Open, untriaged issues: a finding whose title contains `match` is written as
+   * a "Known open (<id>)" row and does not fail the run. Remove once triaged.
+   */
+  knownIssues?: Array<{ match: string; id: string }>;
+  /**
+   * Regexes (case-insensitive) removed from page text before comparing it with
+   * the baseline, for parts that change on purpose (dates, counters).
+   */
+  contentMasks?: string[];
   /** Regexes (case-insensitive) for page handles that look like leftovers. */
   leftoverPagePatterns: string[];
   /** Page handles that match a leftover pattern but are legitimate. */

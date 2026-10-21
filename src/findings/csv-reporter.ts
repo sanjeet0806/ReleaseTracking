@@ -133,6 +133,7 @@ export default class CsvFindingsReporter implements Reporter {
       durationSeconds: Math.round((Date.now() - this.started) / 1000),
       seed: process.env.SEED ?? this.foundOn, sites: this.sites,
       tests: { total: this.tests.length, passed: count('expected'), failed: count('unexpected'), flaky: count('flaky'), skipped: count('skipped') },
+      coverageNotes: this.tests.flatMap((t) => (t.results.at(-1)?.annotations ?? []).filter((a) => a.type === 'coverage').map((a) => `${t.parent.project()?.name}: ${a.description}`)),
       findings: rows.reduce<Record<string, number>>((acc, r) => ({ ...acc, [r.status]: (acc[r.status] ?? 0) + 1 }), {}),
       findingsCsv: file,
     };

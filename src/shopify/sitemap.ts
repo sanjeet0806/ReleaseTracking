@@ -67,6 +67,11 @@ export async function sitemapPaths(client: SiteClient, kind: SitemapKind, limit 
   return [...out];
 }
 
+/** De-duplicated URL paths from one child sitemap. */
+export async function childSitemapPaths(client: SiteClient, childPath: string): Promise<string[]> {
+  return [...new Set((await fetchLocs(client, childPath)).map(toPath))];
+}
+
 /** Every page path listed in the pages sitemap(s). */
 export function pagePaths(client: SiteClient): Promise<string[]> {
   return sitemapPaths(client, 'pages');
