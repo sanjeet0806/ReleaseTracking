@@ -14,7 +14,12 @@
   "keyPages": [
     {
       "name": "Home",
-      "path": "/"
+      "path": "/",
+      "expectText": [
+        "Why Buy From Us",
+        "Find A Shop",
+        "Store Inventory"
+      ]
     },
     {
       "name": "All products",
@@ -144,6 +149,8 @@
   ],
   "run": {
     "minRequestIntervalMs": 1000,
-    "userAgent": "Mozilla/5.0 (compatible; EZQA-Automation/0.1)"
-  }
+    "userAgent": "Mozilla/5.0 (compatible; EZQA-Automation/0.1)",
+    "maxResponseMs": 5000
+  },
+  "leftoverPageAllow": []
 }

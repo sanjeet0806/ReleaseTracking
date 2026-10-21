@@ -12,6 +12,11 @@ export interface PageResponse {
   ms: number;
 }
 
+/** "301 (to /x)" style description of a response's status, for findings. */
+export function describeStatus(res: PageResponse): string {
+  return `${res.status}${res.redirectTo ? ` (to ${res.redirectTo})` : ''}`;
+}
+
 /**
  * The request never reached the site: DNS, proxy, TLS or connection failure.
  * The findings reporter files these under "Environment", not as site defects.

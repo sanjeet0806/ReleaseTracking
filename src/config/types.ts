@@ -35,9 +35,13 @@ export interface SiteConfig {
   };
   /** Regexes (case-insensitive) for page handles that look like leftovers. */
   leftoverPagePatterns: string[];
+  /** Page handles that match a leftover pattern but are legitimate. */
+  leftoverPageAllow?: string[];
   run: {
     minRequestIntervalMs: number;
     userAgent: string;
+    /** A page slower than this (server response, not full load) is a finding. */
+    maxResponseMs: number;
   };
 }
 
@@ -55,6 +59,8 @@ export interface KeyPage {
    * still runs and writes a "Known open" row each run until the ID is removed.
    */
   knownFinding?: string;
+  /** Text that must appear on the page (header, footer or body), e.g. nav labels. */
+  expectText?: string[];
 }
 
 export type ProductField = 'title' | 'handle' | 'vendor' | 'product_type' | 'body_html' | 'images' | 'price' | 'sku';

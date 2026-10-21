@@ -44,6 +44,7 @@ export function validateSite(raw: unknown, source: string): SiteConfig {
     fail(source, `run.minRequestIntervalMs must be at least ${MIN_PRODUCTION_INTERVAL_MS} for production`);
   }
   if (!nonEmptyString(site.run.userAgent)) fail(source, 'run.userAgent is required');
+  if (typeof site.run.maxResponseMs !== 'number' || site.run.maxResponseMs < 1) fail(source, 'run.maxResponseMs must be a positive number');
 
   const s = site.sampling;
   if (!Number.isInteger(s?.maxCatalogPage) || s.maxCatalogPage < 1 || s.maxCatalogPage > 100) fail(source, 'sampling.maxCatalogPage must be an integer 1-100');
@@ -61,6 +62,7 @@ export function validateSite(raw: unknown, source: string): SiteConfig {
     if (!Number.isInteger(status) || status < 100 || status > 599) fail(source, `keyPages[${i}].expectStatus must be an HTTP status`);
     if (p.expectRedirectTo !== undefined && (status < 300 || status > 399)) fail(source, `keyPages[${i}].expectRedirectTo needs a 3xx expectStatus`);
     if (status >= 300 && status <= 399 && !nonEmptyString(p.expectRedirectTo)) fail(source, `keyPages[${i}] expects a redirect but has no expectRedirectTo`);
+    if (p.expectText !== undefined && (!Array.isArray(p.expectText) || !p.expectText.every(nonEmptyString))) fail(source, `keyPages[${i}].expectText must be a list of non-empty strings`);
   });
 
   if (!Array.isArray(site.keyCollections)) fail(source, 'keyCollections must be a list');
@@ -70,6 +72,7 @@ export function validateSite(raw: unknown, source: string): SiteConfig {
   if (!nonEmptyString(site.search.noResultTerm)) fail(source, 'search.noResultTerm is required');
   if (!Array.isArray(site.leftoverPagePatterns)) fail(source, 'leftoverPagePatterns must be a list');
   site.leftoverPagePatterns.forEach((re, i) => checkRegex(source, `leftoverPagePatterns[${i}]`, re));
+  if (site.leftoverPageAllow !== undefined && (!Array.isArray(site.leftoverPageAllow) || !site.leftoverPageAllow.every(nonEmptyString))) fail(source, 'leftoverPageAllow must be a list of page handles');
   return site;
 }
 

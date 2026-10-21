@@ -26,12 +26,14 @@ export function attr(tag: string, name: string): string | undefined {
   return m ? decodeEntities(m[1] ?? m[2]) : undefined;
 }
 
-/** Visible text of the <main> element (or <body>), without scripts, templates or markup. */
-export function visibleText(html: string): string {
+/**
+ * Visible text without scripts, templates or markup: of the <main> element by
+ * default (falling back to <body>), or of the whole <body> with scope 'body'.
+ */
+export function visibleText(html: string, scope: 'main' | 'body' = 'main'): string {
   const noComments = html.replace(/<!--[\s\S]*?-->/g, ' ');
-  const main = /<main(?=[\s>])[\s\S]*?<\/main>/i.exec(noComments)?.[0]
-    ?? /<body(?=[\s>])[\s\S]*<\/body>/i.exec(noComments)?.[0]
-    ?? noComments;
+  const body = /<body(?=[\s>])[\s\S]*<\/body>/i.exec(noComments)?.[0];
+  const main = (scope === 'main' ? /<main(?=[\s>])[\s\S]*?<\/main>/i.exec(noComments)?.[0] : undefined) ?? body ?? noComments;
   const stripped = main
     .replace(/<(script|style|noscript|template|svg)(?=[\s>])[\s\S]*?<\/\1>/gi, ' ')
     .replace(/<br\s*\/?>|<\/(p|div|li|h[1-6]|tr|section)>/gi, '\n')
