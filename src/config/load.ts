@@ -68,6 +68,10 @@ export function validateSite(raw: unknown, source: string): SiteConfig {
   if (!Array.isArray(site.keyCollections)) fail(source, 'keyCollections must be a list');
   if (!Array.isArray(site.catalog.requiredProductFields)) fail(source, 'catalog.requiredProductFields must be a list');
   if (!Array.isArray(site.catalog.requiredTagPrefixes)) fail(source, 'catalog.requiredTagPrefixes must be a list');
+  if (!Array.isArray(site.catalog.forbiddenTagPrefixes)) fail(source, 'catalog.forbiddenTagPrefixes must be a list');
+  const fields = ['title', 'handle', 'vendor', 'product_type', 'body_html', 'images', 'price', 'sku'];
+  const badField = site.catalog.requiredProductFields.find((f) => !fields.includes(f));
+  if (badField) fail(source, `catalog.requiredProductFields has unknown field "${badField}" (allowed: ${fields.join(', ')})`);
   if (!Array.isArray(site.search.terms) || !site.search.terms.every(nonEmptyString) || site.search.terms.length === 0) fail(source, 'search.terms must list at least one term');
   if (!nonEmptyString(site.search.noResultTerm)) fail(source, 'search.noResultTerm is required');
   if (!Array.isArray(site.leftoverPagePatterns)) fail(source, 'leftoverPagePatterns must be a list');

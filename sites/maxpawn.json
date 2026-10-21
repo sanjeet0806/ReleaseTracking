@@ -127,12 +127,17 @@
       "title",
       "handle",
       "vendor",
+      "product_type",
+      "body_html",
       "images",
       "price",
       "sku"
     ],
     "requiredTagPrefixes": [
       "Category_"
+    ],
+    "forbiddenTagPrefixes": [
+      "Serial#"
     ]
   },
   "structuredData": {

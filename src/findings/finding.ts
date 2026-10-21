@@ -16,6 +16,8 @@ export interface Finding {
   notes?: string;
   /** Set for a known, untriaged issue: the row is written but the test does not fail. */
   knownFinding?: string;
+  /** Overrides the URL in the stable finding ID, for rows whose example URLs change daily. */
+  fingerprint?: string;
 }
 
 export const FINDING_ANNOTATION = 'finding';

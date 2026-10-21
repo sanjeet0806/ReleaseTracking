@@ -30,7 +30,7 @@ export function csvCell(value: string): string {
 
 /** Same site + area + title + URL gives the same ID in every run, so a defect can be tracked across files. */
 export function findingId(siteId: string, f: Finding): string {
-  return `${siteId.toUpperCase()}-${hash(`${siteId}|${f.area}|${f.title}|${f.url}`).toString(16).padStart(8, '0').slice(0, 6)}`;
+  return `${siteId.toUpperCase()}-${hash(`${siteId}|${f.area}|${f.title}|${f.fingerprint ?? f.url}`).toString(16).padStart(8, '0').slice(0, 6)}`;
 }
 
 /** Writes the findings CSV (UTF-8 with BOM, CRLF) and returns its path. */

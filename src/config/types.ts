@@ -24,6 +24,8 @@ export interface SiteConfig {
     requiredProductFields: ProductField[];
     /** Each product must carry at least one tag with each prefix, e.g. "Store_". */
     requiredTagPrefixes: string[];
+    /** Tag prefixes that must not appear in public product data, e.g. "Serial#". */
+    forbiddenTagPrefixes: string[];
   };
   structuredData: {
     /** false = flag aggregateRating/review markup on product pages. */
