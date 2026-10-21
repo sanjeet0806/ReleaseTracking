@@ -1,0 +1,149 @@
+{
+  "id": "ezpawn",
+  "name": "EZPAWN Online Catalog",
+  "baseUrl": "https://shop.ezpawn.com",
+  "environment": "production",
+  "features": {
+    "zipRadiusSearch": true,
+    "fulfillment": [
+      "pickup",
+      "shipping"
+    ],
+    "searchApp": "wizzy"
+  },
+  "keyPages": [
+    {
+      "name": "Home",
+      "path": "/"
+    },
+    {
+      "name": "All products",
+      "path": "/collections/all"
+    },
+    {
+      "name": "Online exclusives",
+      "path": "/collections/online-exclusives"
+    },
+    {
+      "name": "Jewelry",
+      "path": "/collections/jewelry"
+    },
+    {
+      "name": "Electronics",
+      "path": "/collections/electronics"
+    },
+    {
+      "name": "Search results",
+      "path": "/search?q=ring"
+    },
+    {
+      "name": "Cart",
+      "path": "/cart"
+    },
+    {
+      "name": "FAQ",
+      "path": "/pages/faq",
+      "contentBaseline": true
+    },
+    {
+      "name": "Shop online",
+      "path": "/pages/shop-online"
+    },
+    {
+      "name": "Why buy from us",
+      "path": "/pages/why-ezpawn",
+      "contentBaseline": true
+    },
+    {
+      "name": "Show me how",
+      "path": "/pages/show-me-how",
+      "contentBaseline": true
+    },
+    {
+      "name": "Contact us",
+      "path": "/pages/contact-us"
+    },
+    {
+      "name": "About us",
+      "path": "/pages/about-us",
+      "contentBaseline": true
+    },
+    {
+      "name": "Store pickup policy (old URL)",
+      "path": "/pages/store-pick-up-policy",
+      "expectStatus": 301,
+      "expectRedirectTo": "/pages/show-me-how",
+      "knownFinding": "QA-009"
+    },
+    {
+      "name": "Refund policy",
+      "path": "/policies/refund-policy",
+      "contentBaseline": true
+    },
+    {
+      "name": "Terms of service",
+      "path": "/policies/terms-of-service",
+      "contentBaseline": true
+    },
+    {
+      "name": "Privacy policy",
+      "path": "/policies/privacy-policy",
+      "contentBaseline": true
+    }
+  ],
+  "keyCollections": [
+    "all",
+    "online-exclusives",
+    "jewelry",
+    "electronics",
+    "tools",
+    "gaming",
+    "musical-instruments-and-accessories"
+  ],
+  "sampling": {
+    "productsPerRun": 10,
+    "maxCatalogPage": 100,
+    "storePages": {
+      "pattern": "^/pages/store_\\d+$",
+      "perRun": 10
+    }
+  },
+  "catalog": {
+    "requiredProductFields": [
+      "title",
+      "handle",
+      "vendor",
+      "images",
+      "price",
+      "sku"
+    ],
+    "requiredTagPrefixes": [
+      "Store_",
+      "state_",
+      "city_",
+      "Category_"
+    ]
+  },
+  "structuredData": {
+    "allowRatings": false
+  },
+  "search": {
+    "terms": [
+      "ring",
+      "iphone",
+      "drill"
+    ],
+    "noResultTerm": "zzqxjvnoresultqa"
+  },
+  "leftoverPagePatterns": [
+    "(^|-)test(-|$)",
+    "^copy-of",
+    "lorem",
+    "(^|-)draft(-|$)",
+    "^untitled"
+  ],
+  "run": {
+    "minRequestIntervalMs": 1000,
+    "userAgent": "Mozilla/5.0 (compatible; EZQA-Automation/0.1)"
+  }
+}
