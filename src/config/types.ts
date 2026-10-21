@@ -37,8 +37,11 @@ export interface SiteConfig {
     allowRatings: boolean;
   };
   search: {
+    /** Brand or category terms that should always have matches. */
     terms: string[];
     noResultTerm: string;
+    /** Misspelled terms and the word the suggestions must still contain. */
+    misspellings?: Array<{ term: string; expect: string }>;
   };
   /**
    * Open, untriaged issues: a finding whose title contains `match` is written as

@@ -61,9 +61,15 @@ Pages with `"contentBaseline": true` are compared with approved text in
 is new or different, the run writes it to `baselines-proposed/<site>/` and
 records a finding.
 
+The header and footer link list of the home page is compared the same way
+(`baselines/<site>/_navigation.txt`). A run removes a page's proposal once the
+page matches its approved baseline again.
+
 To approve: review the proposed file, copy it into `baselines/<site>/`, and
-commit it. `npm run baselines:propose` proposes text for every page without
-failing on missing baselines.
+commit it. `.github/CODEOWNERS` requires the QA owner's review for changes to
+`baselines/`. `npm run baselines:propose` proposes text for pages that have no
+baseline yet (listed as `Known open (BASELINE-PENDING)` instead of failing);
+a page whose approved text changed still fails.
 
 ## Onboard a new Shopify site
 

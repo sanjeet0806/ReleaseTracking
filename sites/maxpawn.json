@@ -152,7 +152,17 @@
       "rolex",
       "louis vuitton"
     ],
-    "noResultTerm": "zzqxjvnoresultqa"
+    "noResultTerm": "zzqxjvnoresultqa",
+    "misspellings": [
+      {
+        "term": "rolx",
+        "expect": "rolex"
+      },
+      {
+        "term": "louis vuiton",
+        "expect": "louis vuitton"
+      }
+    ]
   },
   "knownIssues": [
     {
@@ -161,8 +171,8 @@
     }
   ],
   "contentMasks": [
-    "\\u00a9\\s*\\d{4}",
-    "copyright\\s*\\d{4}"
+    "\\u00a9\\s*\\d{4}(\\s*[-\\u2013]\\s*\\d{4})?",
+    "copyright\\s*\\d{4}(\\s*[-\\u2013]\\s*\\d{4})?"
   ],
   "leftoverPagePatterns": [
     "(^|-)test(-|$)",

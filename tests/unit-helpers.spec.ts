@@ -38,3 +38,17 @@ test.describe('framework helpers @unit', () => {
     expect(findingId('ezpawn', f)).toBe(findingId('ezpawn', { ...f, actual: 'different' }));
   });
 });
+
+test.describe('content baseline helpers @unit', () => {
+  test('baselines compare equal across CRLF and trailing newlines; names do not collide', async () => {
+    const { comparableText, baselineName, diffLines, describeChange, navigationLinks } = await import('../src/content/baseline');
+    expect(comparableText('A\r\nB\r\n')).toBe(comparableText('A\nB'));
+    expect(comparableText('  \n ')).toBe('');
+    expect(baselineName('/pages/a-b')).not.toBe(baselineName('/pages/a/b'));
+    expect(baselineName('/')).toBe('home.txt');
+    expect(diffLines('a\nb\n', 'a\nc\n')).toEqual({ added: ['c'], removed: ['b'] });
+    expect(describeChange('Returns accepted within 30 days of purchase', ['Returns accepted within 14 days of purchase'])).toContain('→');
+    const nav = navigationLinks('<header><a href="/cart">3</a><a href="/pages/faq">FAQ</a></header><footer><a href="https://x.com/a">X</a></footer>', 'https://shop.test');
+    expect(nav).toBe('header | (count) | /cart\nheader | FAQ | /pages/faq\nfooter | X | https://x.com/a\n');
+  });
+});

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { SiteConfig } from './types';
+import { baselineName, NAVIGATION_BASELINE } from '../content/baseline';
 
 export const SITES_DIR = path.join(__dirname, '..', '..', 'sites');
 
@@ -78,6 +79,15 @@ export function validateSite(raw: unknown, source: string): SiteConfig {
   if (badField) fail(source, `catalog.requiredProductFields has unknown field "${badField}" (allowed: ${fields.join(', ')})`);
   if (!Array.isArray(site.search.terms) || !site.search.terms.every(nonEmptyString) || site.search.terms.length === 0) fail(source, 'search.terms must list at least one term');
   if (!nonEmptyString(site.search.noResultTerm)) fail(source, 'search.noResultTerm is required');
+  if (site.search.misspellings !== undefined && (!Array.isArray(site.search.misspellings) || !site.search.misspellings.every((m) => nonEmptyString(m?.term) && nonEmptyString(m?.expect)))) fail(source, 'search.misspellings must be a list of { term, expect }');
+  const names = new Map<string, string>();
+  for (const p of site.keyPages.filter((k) => k.contentBaseline)) {
+    if (p.path.includes('?')) fail(source, `keyPages "${p.name}": a contentBaseline page must not have a query string`);
+    const n = baselineName(p.path);
+    if (names.has(n)) fail(source, `keyPages "${p.name}" and "${names.get(n)}" would share baseline file ${n}`);
+    names.set(n, p.name);
+  }
+  if (names.has(NAVIGATION_BASELINE)) fail(source, `${NAVIGATION_BASELINE} is reserved for the header and footer link baseline`);
   if (!Array.isArray(site.leftoverPagePatterns)) fail(source, 'leftoverPagePatterns must be a list');
   if (site.contentMasks !== undefined) {
     if (!Array.isArray(site.contentMasks)) fail(source, 'contentMasks must be a list of regexes');
