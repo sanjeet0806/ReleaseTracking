@@ -1,0 +1,190 @@
+{
+  "id": "maxpawn",
+  "name": "Max Pawn",
+  "baseUrl": "https://maxpawn.com",
+  "environment": "production",
+  "features": {
+    "zipRadiusSearch": false,
+    "fulfillment": [
+      "shipping"
+    ],
+    "searchApp": "wizzy"
+  },
+  "keyPages": [
+    {
+      "name": "Home",
+      "path": "/",
+      "expectText": [
+        "Featured Designers",
+        "Handbags",
+        "Jewelry"
+      ]
+    },
+    {
+      "name": "All products",
+      "path": "/collections/all-products"
+    },
+    {
+      "name": "Handbags",
+      "path": "/collections/handbags"
+    },
+    {
+      "name": "Jewelry",
+      "path": "/collections/jewelry"
+    },
+    {
+      "name": "Watches",
+      "path": "/collections/watches"
+    },
+    {
+      "name": "Designers",
+      "path": "/collections/designers"
+    },
+    {
+      "name": "Search results",
+      "path": "/search?q=gucci"
+    },
+    {
+      "name": "Cart",
+      "path": "/cart"
+    },
+    {
+      "name": "Login",
+      "path": "/account/login"
+    },
+    {
+      "name": "About us",
+      "path": "/pages/about-us",
+      "contentBaseline": true
+    },
+    {
+      "name": "Authenticity",
+      "path": "/pages/authenticity",
+      "contentBaseline": true
+    },
+    {
+      "name": "Layaway",
+      "path": "/pages/10x10x10-layaway",
+      "contentBaseline": true
+    },
+    {
+      "name": "Sahara Ave store",
+      "path": "/pages/locations-sahara-ave-las-vegas",
+      "contentBaseline": true
+    },
+    {
+      "name": "Decatur Blvd store",
+      "path": "/pages/locations-decatur-blvd-las-vegas",
+      "contentBaseline": true
+    },
+    {
+      "name": "Durango store",
+      "path": "/pages/locations-durango-las-vegas",
+      "contentBaseline": true
+    },
+    {
+      "name": "Miami Beach store",
+      "path": "/pages/1452-washington-ave-miami-beach",
+      "contentBaseline": true
+    },
+    {
+      "name": "Refund policy",
+      "path": "/policies/refund-policy",
+      "contentBaseline": true
+    },
+    {
+      "name": "Shipping policy",
+      "path": "/policies/shipping-policy",
+      "contentBaseline": true
+    },
+    {
+      "name": "Privacy policy",
+      "path": "/policies/privacy-policy",
+      "contentBaseline": true
+    },
+    {
+      "name": "Terms of service",
+      "path": "/policies/terms-of-service",
+      "contentBaseline": true
+    }
+  ],
+  "keyCollections": [
+    "all-products",
+    "handbags",
+    "jewelry",
+    "watches",
+    "designers",
+    "accessories",
+    "shoes",
+    "on-sale"
+  ],
+  "sampling": {
+    "productsPerRun": 10,
+    "maxCatalogPage": 15
+  },
+  "catalog": {
+    "requiredProductFields": [
+      "title",
+      "handle",
+      "vendor",
+      "product_type",
+      "body_html",
+      "images",
+      "price",
+      "sku"
+    ],
+    "requiredTagPrefixes": [
+      "Category_"
+    ],
+    "forbiddenTagPrefixes": [
+      "Serial#"
+    ],
+    "currency": "USD",
+    "locale": "en-US",
+    "priceInHtml": true
+  },
+  "structuredData": {
+    "allowRatings": false
+  },
+  "search": {
+    "terms": [
+      "gucci",
+      "rolex",
+      "louis vuitton"
+    ],
+    "noResultTerm": "zzqxjvnoresultqa",
+    "misspellings": [
+      {
+        "term": "rolx",
+        "expect": "rolex"
+      },
+      {
+        "term": "louis vuiton",
+        "expect": "louis vuitton"
+      }
+    ]
+  },
+  "knownIssues": [
+    {
+      "match": "Public product data includes \"Serial#\"",
+      "id": "QA-004"
+    }
+  ],
+  "contentMasks": [
+    "\\u00a9\\s*\\d{4}(\\s*[-\\u2013]\\s*\\d{4})?",
+    "copyright\\s*\\d{4}(\\s*[-\\u2013]\\s*\\d{4})?"
+  ],
+  "leftoverPagePatterns": [
+    "(^|-)test(-|$)",
+    "^copy-of",
+    "lorem",
+    "(^|-)draft(-|$)",
+    "^untitled"
+  ],
+  "run": {
+    "minRequestIntervalMs": 1000,
+    "userAgent": "Mozilla/5.0 (compatible; EZQA-Automation/0.1)",
+    "maxResponseMs": 5000
+  },
+  "leftoverPageAllow": []
+}

@@ -1,0 +1,15 @@
+header | EZPAWN home | /
+header | Why buy from us | /pages/why-ezpawn
+header | (no text) | /pages/show-me-how
+header | Find a Shop | https://ezpawn.com/find-a-location/
+header | Sign in / Sign up | /account
+header | (count) | /cart
+header | All categories › | /collections/all
+footer | Terms and Conditions | /policies/terms-of-service
+footer | Why Buy From Us | /pages/why-ezpawn
+footer | FAQ | /pages/faq
+footer | Contact Us | /pages/contact-us
+footer | About EZPawn | /pages/about-us
+footer | Privacy Policy | https://www.ezcorp.com/static-files/1fb9782c-d1a4-46c4-af67-c89578ece91b
+footer | Return & Refund Policy | /policies/refund-policy
+footer | (no text) | https://www.shopify.com/?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore

@@ -1,0 +1,21 @@
+{
+  "name": "shopify-qa-framework",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Config-driven QA automation for Shopify storefronts",
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:sanity": "playwright test --grep \"@smoke|@sanity\"",
+    "test:ezpawn": "playwright test --project=ezpawn",
+    "test:maxpawn": "playwright test --project=maxpawn",
+    "baselines:propose": "cross-env UPDATE_BASELINES=1 playwright test --grep @content",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "@types/node": "22.20.5",
+    "cross-env": "^7.0.3",
+    "typescript": "5.9.3"
+  }
+}
