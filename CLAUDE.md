@@ -9,3 +9,4 @@ Standards to apply when validating tickets in this repo. Treat a deviation as a 
   - Check the response `filePath` (base64; decode it) and `url`.
 - Each application writes only to its own container (e.g. `mim`, `product-identifier`).
 - A fixed `config/` folder is only for static config assets (e.g. `mim/config/mim-promo-bg.png`), never for user uploads.
+- **Exception: `mim`** uploads go to `mim/config/` with no dated folder. This is correct (confirmed by Surinder Pruthi, Nov 2026): the files are referenced by the business rule `mimPromoTemplate.bgImageUrl`, and a new upload overwrites the old file so the rule doesn't change. Don't raise it as a defect.
